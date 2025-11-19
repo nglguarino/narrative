@@ -1,6 +1,6 @@
 # Multi-Agent Narrative Extraction Framework
 
-This repository contains the implementation for the paper submitted to ACL: "Bottom-Up Multi-Agent Framework for Narrative Extraction from News Articles"
+This repository contains the code for my thesis work (in progress).
 
 ## Overview
 
