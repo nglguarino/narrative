@@ -117,7 +117,3 @@ If you use this code in your research, please cite:
   year={2025}
 }
 ```
-
-## License
-
-MIT License
