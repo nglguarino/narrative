@@ -7,6 +7,7 @@ Extracts narratives directly from full articles using multi-agent consensus.
 from typing import List, Dict, Any, Optional
 from datetime import datetime
 from ..models.agents import Agent, MultiAgentConsensus
+from ..models.async_agents import AsyncMultiAgentConsensus
 from ..utils.deduplication import SemanticDedupe
 
 
@@ -45,7 +46,7 @@ Output ONLY the narratives, one per line, no numbering or bullets."""
             embedding_model: Optional embedding model for semantic deduplication
         """
         self.agents = agents
-        self.consensus = MultiAgentConsensus(agents)
+        self.consensus = AsyncMultiAgentConsensus(agents)
         self.embedding_model = embedding_model
         self.max_narratives = max_narratives
         if embedding_model:
