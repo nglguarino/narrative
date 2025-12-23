@@ -127,7 +127,7 @@ class ArticleNarrativeExtractor:
             if 'title' in metadata:
                 context += f"\nTitle: {metadata['title']}"
 
-        prompt = f"""Identify the narratives used in this article.{context}
+        prompt = f"""Identify the narratives used in this article.
 
     ARTICLE:
     {article}
