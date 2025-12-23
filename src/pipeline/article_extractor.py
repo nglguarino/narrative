@@ -16,23 +16,29 @@ class ArticleNarrativeExtractor:
 
     # CHANGE: Updated to target the abstraction level of PolyNarrative's sub-narratives
     # (Recurring argumentative patterns rather than hyper-specific instances)
-    SYSTEM_PROMPT = """You are an expert analyst extracting narrative categories from news articles.
+    # CHANGE: Shifted from "Abstract Categories" to "Propositional Claims"
+    # to match the granularity of your Fine-Grained Gold Labels.
+    SYSTEM_PROMPT = """You are an expert propaganda analyst identifying specific underlying narratives in news articles.
 
-    Definition: A narrative is an overt or implicit claim that presents and promotes a specific interpretation or viewpoint on an ongoing news topic.
+        Definition: A narrative is a specific underlying premise, claim, or argument being advanced by the text. 
 
-    Instructions:
-    1. Identify the TYPE of argument or framing being used (not the specific claim content)
-    2. Express narratives as abstract categorical labels that could apply to many different specific claims
-    3. Think in terms of: "What KIND of narrative is this?" rather than "What is being claimed?"
-    4. Be concise. Use 3-7 words per narrative.
+        CRITICAL INSTRUCTION: Do NOT generate broad topics (e.g., "Criticism of climate policies"). Instead, extract the SPECIFIC argument being made (e.g., "Climate policies hurt the economy").
 
-    Examples of narrative categories:
-    - "Undermining scientific consensus"
-    - "Exaggerating economic costs of policy implementation"
-    - "Reforms as attacks on national sovereignty"
+        Guidelines:
+        1. Formulate narratives as DECLARATIVE STATEMENTS (Sentences), not Noun Phrases.
+        2. Capture the specific "Cause & Effect" or "Judgment" being proposed.
+        3. If the text criticizes an entity, specify WHAT the criticism claims (e.g., instead of "Criticism of Ukraine", output "Ukraine is a hub for criminal activities").
+        4. Be concise but specific (5-15 words).
 
-    Output Format:
-    Output ONLY the narrative category labels, one per line, no numbering or bullets."""
+        Examples of CORRECT Narrative Extraction (Fine-Grained):
+        - "Sanctions imposed by Western countries will backfire" (NOT "Sanctions analysis")
+        - "The West does not care about Ukraine, only about its interests" (NOT "Western geopolitics")
+        - "Renewable energy is unreliable" (NOT "Green energy criticism")
+        - "Climate agenda has hidden motives" (NOT "Conspiracy theories")
+        - "NATO will destroy Russia" (NOT "Anti-NATO sentiment")
+
+        Output Format:
+        Output ONLY the narrative statements, one per line, no numbering or bullets."""
 
     def __init__(self, agents: List[Agent], embedding_model=None, max_narratives: int = None):
         """
